@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="padding-top: 5rem;">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="{% static 'main/img/logo/logo2.png' %}" alt="" width="150"
+                height="150">
+            <h2>شكراً على تسوقك من فودك</h2>
+            <p class="lead">وسعداء بوجود عميل مثلك لدينا.
+
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary"> الفاتورة</span>
+                    <span class="badge bg-primary rounded-pill">{{cart.count}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    {% for i in cart %}
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">{{i.product.title}}</h6>
+                            <small class="text-muted">عدد {{i.quantity}} </small>
+                        </div>
+                        {% if i.product.discount %}
+                        <span><s style="color: #dc2f02;">{{i.product.price}}</s> جنية </span>
+                        <span>{{i.product.discount}} جنية </span>
+                        {% else %}
+                        <span>{{i.product.price}}جنية </span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>التوصيل </span>
+                        <strong class="">
+                            جنية {{request.user.customer.region.price}}
+                        </strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>اجمالي </span>
+                        <strong class="total_price">
+                            جنية {{cart.0.get_total_price|add:request.user.customer.region.price}}
+                        </strong>
+                    </li>
+                </ul>
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control poromoText" name="poromoText"
+                            placeholder="ادخل الكبون الخاص بك" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend">
+                        <button type="button" name="PromoCode" class="btn Redeem btn-secondary">ادخل</button>
+                        <div class="invalid-feedback">
+                            هذا الكود غير صحيح
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">بيانات التوصيل</h4>
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <input type="hidden" name="codeing" id="codeing" value="">
+                        {{form|crispy}}
+                    </div>
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" name="checkout">
+                        اتم عملية الشراء</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+{% endblock content %}

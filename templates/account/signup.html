@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% block title %}تسجيل{% endblock %}
+
+{% block content %}
+<h3 class="text-center mt-5">سجل و اكمل عملية الشراء</h3>
+<section class="login d-flex justify-content-center align-items-center" >
+  <div class="container mt-5" >
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6">
+        <div class="card bg-light">
+          <div class="card-body">
+            <div class="mb-3">
+              <p>تسجيل دخول بواسطة</p>
+              
+              <a class="btn btn-primary" href="{% url 'account_login' %}?next={{request.GET.next}}">
+                <i class="fas fa-user-plus"></i>
+                تسجيل دخول</a>
+            </div>
+            <form class="login" method="POST" action="{% url 'account_signup' %}">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <input type="hidden" name="next" value="{{request.GET.next}}" />
+              <button class="primaryAction btn btn-success d-block mt-3 mb-3" type="submit">تسجيل </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+<script type="text/javascript">
+  var start = "{{request.GET.next}}"
+</script>
+{% endblock %}

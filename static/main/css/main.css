@@ -1,0 +1,22 @@
+.btn:focus {
+    box-shadow: none !important;
+}
+
+#div_id_email {
+    display: none;
+}
+
+.sign-button {
+    color: #00466b;
+    border: 1px solid #00466b;
+}
+
+.login-button {
+    background-color: #015e91;
+    color: #fff;
+}
+
+.login-button:hover,
+.sign-button:hover {
+    background-color: #015e91;
+}

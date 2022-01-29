@@ -1,0 +1,29 @@
+<strong>👤 اسم العميل : </strong>{{create.customer.full_name}}
+
+<strong>📱 رقم التليفون :</strong> {{create.customer.phone}}
+
+<strong>🎫 المنطقة : </strong>{{create.customer.region}}
+
+<strong>🎫 العنوان : </strong>{{create.customer.address}}
+
+<strong>الطلبات</strong>
+ــــــــــــــــــــــــ
+{% for i in create.get_cart %}
+{{forloop.counter}} - {{i.product}}
+الكمية : {{i.quantity}} {{i.product.type_Product}}
+{% endfor %}
+{% if create.discount %}
+🔰خصم
+<strong>مضاف اليها خصم : </strong>{{code}}
+<strong>قيمة الخصم : </strong>{{code.decrease}} %
+<strong>تبقي من الخصم : </strong>{{code.counter}}
+سعر الفاتورة قبل الخصم <s style="color: red;">{{create.get_price|add:create.customer.region.price}}</s>
+سعر الفاتورة بعد الخصم <strong>{{create.price}}</strong> ✅
+{% else %}
+
+سعر الفاتورة <strong>{{create.price}}</strong> ✅
+{% endif %}
+ــــــــــــــــــــــــ
+رقم الفاتورة {{create.id}}
+ــــــــــــــــــــــــ
+تريخ الطلب {{create.created|date:"j/m/Y "}} {{create.created|date:"A g:i"}}

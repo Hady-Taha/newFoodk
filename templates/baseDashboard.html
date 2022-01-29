@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <!--Bootstrap -V 5.1.3x-->
+    <title>{% block title %}{{title}}{% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/lib/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/lib/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/lib/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+    <!--jquery -V 3.6.0-->
+</head>
+
+<body style="background-color: #e5e5e5;">
+    {% include 'components/navDashboard.html' %}
+
+    {% block content %}
+
+
+    {% endblock content %}
+
+
+    <script type="text/javascript" src="{% static 'main/js/lib/swiper-bundle.min.js' %} "></script>
+    <script type="text/javascript" src="{% static 'main/js/swiper.js' %} "></script>
+    <script type="text/javascript" src="{% static 'main/js/lib/aos.js' %} "></script>
+    <script type="text/javascript" src="{% static 'main/js/lib/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/lib/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/dashboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/sendRequest.js' %}"></script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+    </script>
+</body>
+
+</html>

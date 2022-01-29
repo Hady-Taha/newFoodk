@@ -1,0 +1,29 @@
+{% load static %}
+<!-- navbar -->
+<nav class="navbar navbar-light bg-warning shadow">
+    <div class="container d-flex justify-content-between">
+        <div>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'main/img/logo/logo2.png' %} " alt="" width="70" height="70" />
+            </a>
+        </div>
+
+        <div class="d-inline-flex button-font">
+            {% if user.is_authenticated %}
+            <a href="{% url 'orders' %}" class="btn btn-outline-primary mx-1 sign-button">الفواتير
+                السابقة
+            </a>
+            <a href="{% url 'home' %}" class="btn btn-outline-primary mx-1 sign-button">الصفحة الرئسية
+                السابقة
+            </a>
+            {% else %}
+            <a href="/accounts/signup" class="btn btn-outline-primary mx-1 sign-button">
+                مستخدم جديد
+            </a>
+            <a href="/accounts/login" class="btn btn-primary mx-1 login-button">تسجيل دخول</a>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+<!-- navbar -->

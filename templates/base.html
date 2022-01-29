@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+	<script type="text/javascript">
+		function getCookie(name) {
+			var cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				var cookies = document.cookie.split(';');
+				for (var i = 0; i < cookies.length; i++) {
+					var cookie = cookies[i].trim();
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+
+
+		function uuidv4() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				var r = Math.random() * 16 | 0,
+					v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
+		let device = getCookie('device')
+
+		if (device == null || device == undefined) {
+			device = uuidv4()
+		}
+		document.cookie = 'device=' + device + ";domain=;path=/"
+	</script>
+	<!--Bootstrap -V 5.1.3x-->
+	<title>{% block title %}{{title}}{% endblock title %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/lib/bootstrap-icons.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/lib/bootstrap.rtl.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+	<!--jquery -V 3.6.0-->
+
+
+</head>
+
+<body >
+
+
+	{% include "components/navbar.html" %}
+	{% block content %}
+
+
+	{% endblock content %}
+
+{% include "components/footer.html" %}
+
+
+
+	<script type="text/javascript" src="{% static 'main/js/lib/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/lib/bootstrap.bundle.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/csrftoken.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/sendRequest.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+	{% csrf_token %}
+
+</body>
+
+</html>
